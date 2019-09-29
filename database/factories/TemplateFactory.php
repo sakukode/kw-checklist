@@ -11,12 +11,8 @@
 |
  */
 
-$factory->define('App\Checklist', function (Faker\Generator $faker) {
+$factory->define('App\Template', function (Faker\Generator $faker) {
     return [
-        'object_domain' => $faker->domainWord,
-        'object_id'     => $faker->randomDigitNotNull,
-        'description'   => $faker->sentence,
-        'is_completed'  => false,
-        'template_id'	=> null,
+        'name' => $faker->name,        
     ];
 });

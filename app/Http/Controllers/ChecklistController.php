@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
 use App\Checklist;
-use App\Http\Resources\ChecklistResource;
+use App\Http\Resources\ChecklistResources;
 use App\Http\Resources\ChecklistsResource;
 
 class ChecklistController extends Controller
@@ -46,7 +46,7 @@ class ChecklistController extends Controller
             return $this->customResponse('Not Found', 404);
         }
 
-        $response = new ChecklistResource($checklist);
+        $response = new ChecklistResources($checklist);
 
         return $response;
     }
@@ -80,7 +80,7 @@ class ChecklistController extends Controller
                 $checklist->items()->createMany($checklist_items);
             }
 
-            return new ChecklistResource($checklist);      
+            return new ChecklistResources($checklist);      
         }
 
         return $this->customResponse('Server Error', 500);
@@ -113,7 +113,7 @@ class ChecklistController extends Controller
         if($res){
             //return updated data
             $checklist = Checklist::find($checklistId);
-            return new ChecklistResource($checklist);        
+            return new ChecklistResources($checklist);        
         }
 
         //Return error 500 response if updated was not successful        

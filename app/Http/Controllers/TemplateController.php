@@ -8,6 +8,9 @@ use Illuminate\Support\Arr;
 use App\Checklist;
 use App\Template;
 
+use App\Http\Resources\TemplateResource;
+use App\Http\Resources\TemplatesResource;
+
 class TemplateController extends Controller
 {
     /**
@@ -27,13 +30,28 @@ class TemplateController extends Controller
      */
     public function index(Request $request)
     {        
-        
+        //get params filter&sort
+        $filters = $request->get('filter');    
+        $sort    = $request->get('sort');       
+        $page    = $request->get('page');
+        $limit   = $page ? $page['limit'] : 10;
+        $offset  = $page ? $page['offset'] : 0;       
+       
+        return new TemplatesResource(Template::pagination($limit, $offset, $sort, $filters)->get());
     }
 
 
-    public function show(Request $request, $id)
+    public function show($id)
     {
-        
+        $template = Template::find($id);
+
+        if(!$template) {
+            return $this->customResponse('Not Found', 404);
+        }
+
+        $response = new TemplateResource($template);
+
+        return $response;        
     }
 
     public function store(Request $request)

@@ -4,9 +4,9 @@ namespace App\Http\Resources;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Collection;
 
-use App\Checklist;
+use App\Template;
 
-class ChecklistsResource extends ResourceCollection
+class TemplatesResource extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
@@ -18,7 +18,7 @@ class ChecklistsResource extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data' => ChecklistResources::collection($this->collection),
+            'data' => TemplateResource::collection($this->collection),
         ];
     }    
 
@@ -34,7 +34,7 @@ class ChecklistsResource extends ResourceCollection
         $offset = $page['offset'];
 
         //total rows
-        $total = Checklist::count();
+        $total = Template::count();
         //total pages
         $total_pages = ceil($total / $limit);        
         //current page

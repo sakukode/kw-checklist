@@ -3,7 +3,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\Resource;
 
-class ChecklistResource extends Resource
+class ChecklistResources extends Resource
 {
     /**
      * Transform the resource into an array.
@@ -26,11 +26,10 @@ class ChecklistResource extends Resource
             'created_at'    => $this->created_at,
             'due'           => $this->due,
             'urgency'       => $this->urgency,            
+            $this->mergeWhen($request->get('include') == "items", [
+                'items' => $this->items
+            ])
         ];
-
-        if($request->get('include') == "items") {
-            $attributes['items'] = $this->items;
-        }
 
         return [
             'type'       => 'checklists',

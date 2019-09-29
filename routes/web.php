@@ -20,6 +20,8 @@ $router->post('checklists/templates', 'TemplateController@store');
 $router->patch('checklists/templates/{templateId}', 'TemplateController@update');
 $router->delete('checklists/templates/{templateId}', 'TemplateController@destroy');
 $router->post('checklists/templates/{templateId}/assigns', 'TemplateController@assigns');
+$router->get('checklists/templates/{templateId}', [ 'as' => 'templates.show', 'uses' => 'TemplateController@show']);
+$router->get('checklists/templates', 'TemplateController@index');
 
 // Items routes
 $router->post('checklists/{checklistId}/items', 'ItemController@store');
