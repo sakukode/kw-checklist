@@ -83,9 +83,9 @@ class TemplateController extends Controller
         }
     }
 
-    public function update($id, Request $request)
+    public function update($templateId, Request $request)
     {           
-        $template = Template::find($id);
+        $template = Template::find($templateId);
         //Return error 404 response if data was not found
         if(!$template) 
             return $this->customResponse('Not Found', 404);
@@ -93,7 +93,7 @@ class TemplateController extends Controller
         $data = $request->data;
         $name = $request->input('data.attributes.name');        
         
-        $res = Template::find($id)->update(['name' => $name]);
+        $res = Template::find($templateId)->update(['name' => $name]);
 
         if($res) {            
             $data['id'] = $template->id;            
